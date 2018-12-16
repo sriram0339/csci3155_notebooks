@@ -13182,7 +13182,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Node
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="c1">// A simple attempt is to check at each node if its left child is smaller and right child is larger.</span>
@@ -13192,7 +13192,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Node
     <span class="k">case</span> <span class="nc">Node</span><span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="kc">true</span> <span class="c1">// Nothing to check since both children are leaves</span>
     <span class="k">case</span> <span class="nc">Node</span><span class="o">(</span><span class="n">n1</span><span class="o">,</span> <span class="nc">Node</span><span class="o">(</span><span class="n">n2</span><span class="o">,</span> <span class="k">_</span><span class="o">,</span> <span class="k">_</span> <span class="o">),</span> <span class="k">_</span> <span class="o">)</span> <span class="k">if</span> <span class="o">(</span><span class="n">n2</span> <span class="o">&gt;</span> <span class="n">n1</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="kc">false</span> <span class="c1">// Violates BST property </span>
     <span class="k">case</span> <span class="nc">Node</span><span class="o">(</span><span class="n">n1</span><span class="o">,</span> <span class="k">_</span><span class="o">,</span> <span class="nc">Node</span><span class="o">(</span><span class="n">n3</span><span class="o">,</span> <span class="k">_</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="o">)</span>  <span class="k">if</span> <span class="o">(</span><span class="n">n3</span> <span class="o">&lt;</span> <span class="n">n1</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="kc">false</span> <span class="c1">// Violates BST property</span>
-    <span class="k">case</span> <span class="nc">Node</span><span class="o">(</span><span class="n">n1</span><span class="o">,</span> <span class="n">leftChild</span><span class="o">,</span> <span class="n">rightChild</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">isBST_WrongCode</span><span class="o">(</span><span class="n">leftChild</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">isBSTWrong</span><span class="o">(</span><span class="n">rightChild</span><span class="o">)</span> <span class="c1">// The previous two cases did not match</span>
+    <span class="k">case</span> <span class="nc">Node</span><span class="o">(</span><span class="n">n1</span><span class="o">,</span> <span class="n">leftChild</span><span class="o">,</span> <span class="n">rightChild</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">isBST_WrongCode</span><span class="o">(</span><span class="n">leftChild</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">isBST_WrongCode</span><span class="o">(</span><span class="n">rightChild</span><span class="o">)</span> <span class="c1">// The previous two cases did not match</span>
     <span class="c1">// Therefore, we conclude that n2 &lt;= n1 and n3 &gt;= n1, so all that remains is to </span>
     <span class="c1">// check BST property of left and right children.</span>
 <span class="o">}</span>
@@ -13208,25 +13208,15 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Node
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[32]:</div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>cmd31.sc:6: not found: value isBSTWrong
-    case Node(n1, leftChild, rightChild) =&gt; isBST_WrongCode(leftChild) &amp;&amp; isBSTWrong(rightChild) // The previous two cases did not match
-                                                                          ^</pre>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">isBST_WrongCode</span></pre>
 </div>
-</div>
 
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-Compilation Failed</pre>
-</div>
 </div>
 
 </div>
@@ -13235,7 +13225,7 @@ Compilation Failed</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">findMaxElementHelper</span><span class="o">(</span><span class="n">t</span><span class="k">:</span> <span class="kt">NumTree</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">t</span> <span class="k">match</span> <span class="o">{</span>
@@ -13275,7 +13265,7 @@ Compilation Failed</pre>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[32]:</div>
+<div class="prompt output_prompt">Out[33]:</div>
 
 
 
@@ -13294,45 +13284,11 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">tree1</span> <span class="k">=</span> <span class="nc">Node</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">Node</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">Node</span><span class="o">(</span><span class="mi">3</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">),</span> <span class="nc">Node</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">)),</span> <span class="nc">Node</span><span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">))</span>
 <span class="k">val</span> <span class="n">tree2</span> <span class="k">=</span> <span class="nc">Node</span><span class="o">(</span><span class="mi">6</span><span class="o">,</span> <span class="nc">Node</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="nc">Node</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">),</span> <span class="nc">Leaf</span><span class="o">),</span> <span class="nc">Node</span><span class="o">(</span><span class="mi">10</span><span class="o">,</span> <span class="nc">Node</span><span class="o">(</span><span class="mi">7</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">,</span> <span class="nc">Leaf</span><span class="o">),</span> <span class="nc">Leaf</span><span class="o">))</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt output_prompt">Out[33]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">tree1</span>: <span class="ansi-green-fg">Node</span> = Node(1,Node(2,Node(3,Leaf,Leaf),Node(2,Leaf,Leaf)),Node(4,Leaf,Leaf))
-<span class="ansi-cyan-fg">tree2</span>: <span class="ansi-green-fg">Node</span> = Node(6,Node(2,Node(1,Leaf,Leaf),Leaf),Node(10,Node(7,Leaf,Leaf),Leaf))</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">b1</span> <span class="k">=</span> <span class="n">isBST</span><span class="o">(</span><span class="n">tree1</span><span class="o">)</span>
 </pre></div>
 
 </div>
@@ -13351,7 +13307,8 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">b1</span>: <span class="ansi-green-fg">Boolean</span> = <span class="ansi-green-fg">false</span></pre>
+<pre><span class="ansi-cyan-fg">tree1</span>: <span class="ansi-green-fg">Node</span> = Node(1,Node(2,Node(3,Leaf,Leaf),Node(2,Leaf,Leaf)),Node(4,Leaf,Leaf))
+<span class="ansi-cyan-fg">tree2</span>: <span class="ansi-green-fg">Node</span> = Node(6,Node(2,Node(1,Leaf,Leaf),Leaf),Node(10,Node(7,Leaf,Leaf),Leaf))</pre>
 </div>
 
 </div>
@@ -13363,6 +13320,39 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">b1</span> <span class="k">=</span> <span class="n">isBST</span><span class="o">(</span><span class="n">tree1</span><span class="o">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt output_prompt">Out[35]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">b1</span>: <span class="ansi-green-fg">Boolean</span> = <span class="ansi-green-fg">false</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">b2</span> <span class="k">=</span> <span class="n">isBST</span><span class="o">(</span><span class="n">tree2</span><span class="o">)</span>
@@ -13378,7 +13368,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[35]:</div>
+<div class="prompt output_prompt">Out[36]:</div>
 
 
 
@@ -13414,7 +13404,7 @@ range, we know that the left subtree must be in the range $[l, v]$ and right sub
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">isBST_Eff_Helper</span><span class="o">(</span><span class="n">t</span><span class="k">:</span> <span class="kt">NumTree</span><span class="o">,</span> <span class="n">l</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">r</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="n">t</span> <span class="k">match</span> <span class="o">{</span>
@@ -13438,7 +13428,7 @@ range, we know that the left subtree must be in the range $[l, v]$ and right sub
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[51]:</div>
+<div class="prompt output_prompt">Out[37]:</div>
 
 
 
@@ -13456,7 +13446,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">b3</span> <span class="k">=</span> <span class="n">isBST_Efficient</span><span class="o">(</span><span class="n">tree1</span><span class="o">)</span>
@@ -13472,7 +13462,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[52]:</div>
+<div class="prompt output_prompt">Out[38]:</div>
 
 
 
@@ -13489,7 +13479,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">b4</span> <span class="k">=</span> <span class="n">isBST_Efficient</span><span class="o">(</span><span class="n">tree2</span><span class="o">)</span>
@@ -13505,7 +13495,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[53]:</div>
+<div class="prompt output_prompt">Out[39]:</div>
 
 
 
@@ -13554,7 +13544,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">sealed</span> <span class="k">trait</span> <span class="nc">Expr</span>
@@ -13583,7 +13573,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">i
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[36]:</div>
+<div class="prompt output_prompt">Out[40]:</div>
 
 
 
@@ -13619,7 +13609,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">collectAllVariables</span><span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">Set</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
@@ -13674,7 +13664,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[37]:</div>
+<div class="prompt output_prompt">Out[41]:</div>
 
 
 
@@ -13691,7 +13681,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="c1">// cos(x) + sin(y) + e^{x - y - Zzz}</span>
@@ -13711,7 +13701,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[38]:</div>
+<div class="prompt output_prompt">Out[42]:</div>
 
 
 
@@ -13731,7 +13721,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[43]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">s1</span> <span class="k">=</span> <span class="n">collectAllVariables</span><span class="o">(</span><span class="n">expr1</span><span class="o">)</span>
@@ -13747,7 +13737,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[39]:</div>
+<div class="prompt output_prompt">Out[43]:</div>
 
 
 
@@ -13764,7 +13754,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">expr2</span> <span class="k">=</span> <span class="nc">Plus</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="nc">Exp</span><span class="o">(</span><span class="nc">Const</span><span class="o">(</span><span class="mf">1.5</span><span class="o">)),</span> <span class="nc">Sine</span><span class="o">(</span><span class="nc">Const</span><span class="o">(</span><span class="mf">2.0</span><span class="o">)),</span> <span class="nc">Cosine</span><span class="o">(</span><span class="nc">Mult</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="nc">Const</span><span class="o">(</span><span class="mf">1.2</span><span class="o">),</span> <span class="nc">Const</span><span class="o">(</span><span class="mf">2.4</span><span class="o">))))))</span>
@@ -13780,7 +13770,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[40]:</div>
+<div class="prompt output_prompt">Out[44]:</div>
 
 
 
@@ -13797,7 +13787,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">s2</span> <span class="k">=</span> <span class="n">collectAllVariables</span><span class="o">(</span><span class="n">expr2</span><span class="o">)</span>
@@ -13813,7 +13803,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[41]:</div>
+<div class="prompt output_prompt">Out[45]:</div>
 
 
 
@@ -13843,7 +13833,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">toLatex</span> <span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">)</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="o">{</span>
@@ -13881,7 +13871,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[42]:</div>
+<div class="prompt output_prompt">Out[46]:</div>
 
 
 
@@ -13898,7 +13888,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Cosi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[43]:</div>
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">str1</span><span class="k">=</span> <span class="s">&quot;$&quot;</span><span class="o">+</span><span class="n">toLatex</span><span class="o">(</span><span class="n">expr1</span><span class="o">)+</span><span class="s">&quot;$&quot;</span>
@@ -13928,7 +13918,7 @@ $\left(\cos\left(x\right) + \sin\left(y\right) + e^{\left(x - y - Zzz\right)}\ri
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[43]:</div>
+<div class="prompt output_prompt">Out[47]:</div>
 
 
 
@@ -13947,7 +13937,7 @@ $\left(\cos\left(x\right) + \sin\left(y\right) + e^{\left(x - y - Zzz\right)}\ri
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">w</span> <span class="k">=</span> <span class="nc">Ident</span><span class="o">(</span><span class="s">&quot;w&quot;</span><span class="o">)</span>
@@ -13979,7 +13969,7 @@ $\frac{\left(\left(w + \left(x\ y\right) + \left(1.20 + w\right)\right) - 1.50 -
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[44]:</div>
+<div class="prompt output_prompt">Out[48]:</div>
 
 
 
@@ -14018,7 +14008,7 @@ The answers should be easy in this case:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">myEnvironment</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Double</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">&quot;x&quot;</span> <span class="o">-&gt;</span> <span class="mf">2.0</span><span class="o">,</span> <span class="s">&quot;y&quot;</span> <span class="o">-&gt;</span> <span class="mf">1.5</span><span class="o">,</span> <span class="s">&quot;Zzz&quot;</span> <span class="o">-&gt;</span> <span class="mf">2.8</span><span class="o">,</span> <span class="s">&quot;w&quot;</span> <span class="o">-&gt;</span> <span class="mf">15.2</span><span class="o">,</span> <span class="s">&quot;l&quot;</span> <span class="o">-&gt;</span> <span class="mf">129.3</span><span class="o">)</span>
@@ -14034,7 +14024,7 @@ The answers should be easy in this case:</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[45]:</div>
+<div class="prompt output_prompt">Out[49]:</div>
 
 
 
@@ -14051,7 +14041,7 @@ The answers should be easy in this case:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[50]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">evalExpr</span> <span class="o">(</span><span class="n">e</span><span class="k">:</span> <span class="kt">Expr</span><span class="o">,</span> <span class="n">env</span><span class="k">:</span> <span class="kt">Map</span><span class="o">[</span><span class="kt">String</span>, <span class="kt">Double</span><span class="o">])</span><span class="k">:</span> <span class="kt">Double</span> <span class="o">=</span> <span class="n">e</span> <span class="k">match</span> <span class="o">{</span>
@@ -14099,7 +14089,7 @@ The answers should be easy in this case:</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[57]:</div>
+<div class="prompt output_prompt">Out[50]:</div>
 
 
 
@@ -14116,7 +14106,7 @@ The answers should be easy in this case:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">f1</span> <span class="k">=</span> <span class="n">evalExpr</span><span class="o">(</span><span class="n">expr1</span><span class="o">,</span> <span class="n">myEnvironment</span><span class="o">)</span>
@@ -14132,7 +14122,7 @@ The answers should be easy in this case:</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[58]:</div>
+<div class="prompt output_prompt">Out[51]:</div>
 
 
 
@@ -14149,7 +14139,7 @@ The answers should be easy in this case:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">f2</span> <span class="k">=</span> <span class="n">evalExpr</span><span class="o">(</span><span class="n">expr2</span><span class="o">,</span> <span class="n">myEnvironment</span><span class="o">)</span>
@@ -14165,7 +14155,7 @@ The answers should be easy in this case:</p>
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[59]:</div>
+<div class="prompt output_prompt">Out[52]:</div>
 
 
 
@@ -14182,7 +14172,7 @@ The answers should be easy in this case:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">expr3</span> <span class="k">=</span> <span class="nc">Minus</span><span class="o">(</span><span class="nc">Const</span><span class="o">(</span><span class="mf">1.0</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span>
@@ -14216,7 +14206,7 @@ $\left(1.00 - \left(\sin\left(x\right)\ \sin\left(x\right)\right) - \left(\cos\l
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[49]:</div>
+<div class="prompt output_prompt">Out[53]:</div>
 
 
 
@@ -14233,7 +14223,7 @@ $\left(1.00 - \left(\sin\left(x\right)\ \sin\left(x\right)\right) - \left(\cos\l
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">f3</span> <span class="k">=</span> <span class="n">evalExpr</span><span class="o">(</span><span class="n">expr3</span><span class="o">,</span> <span class="n">myEnvironment</span><span class="o">)</span> <span class="c1">// Should be 0.0</span>
@@ -14249,7 +14239,7 @@ $\left(1.00 - \left(\sin\left(x\right)\ \sin\left(x\right)\right) - \left(\cos\l
 
 <div class="output_area">
 
-<div class="prompt output_prompt">Out[50]:</div>
+<div class="prompt output_prompt">Out[54]:</div>
 
 
 
