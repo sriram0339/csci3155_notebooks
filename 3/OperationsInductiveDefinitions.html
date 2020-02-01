@@ -14593,6 +14593,7 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">Node
     <span class="k">case</span> <span class="nc">Node</span><span class="o">(</span><span class="n">n1</span><span class="o">,</span> <span class="n">lChild</span><span class="o">,</span> <span class="n">rChild</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
         <span class="k">val</span> <span class="n">maxLeft</span> <span class="k">=</span> <span class="n">findMaxElementHelper</span><span class="o">(</span><span class="n">lChild</span><span class="o">)</span>
         <span class="k">val</span> <span class="n">minRight</span> <span class="k">=</span> <span class="n">findMinElementHelper</span><span class="o">(</span><span class="n">rChild</span><span class="o">)</span>
+        <span class="n">isBST</span><span class="o">(</span><span class="n">lChild</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="n">isBST</span><span class="o">(</span><span class="n">rChild</span><span class="o">)</span> <span class="o">&amp;&amp;</span> 
         <span class="o">(</span><span class="n">n1</span> <span class="o">&gt;=</span> <span class="n">maxLeft</span><span class="o">)</span> <span class="o">&amp;&amp;</span> <span class="o">(</span><span class="n">n1</span> <span class="o">&lt;=</span> <span class="n">minRight</span><span class="o">)</span>
     <span class="o">}</span>
 <span class="o">}</span>
@@ -15554,7 +15555,7 @@ $$ \{ x \mapsto 2, y \mapsto 1.5, Zzz \mapsto 2.8, w \mapsto 15.2 \}$$<p>Scala h
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">expr3</span> <span class="k">=</span> <span class="nc">Minus</span><span class="o">(</span><span class="nc">Const</span><span class="o">(</span><span class="mf">1.0</span><span class="o">),</span> <span class="nc">List</span><span class="o">(</span>
@@ -15588,7 +15589,7 @@ $\left(1.00 - \left(\sin\left(x\right)\ \sin\left(x\right)\right) - \left(\cos\l
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[57]:</div>
+    <div class="prompt output_prompt">Out[53]:</div>
 
 
 
@@ -15611,7 +15612,7 @@ $\left(1.00 - \left(\sin\left(x\right)\ \sin\left(x\right)\right) - \left(\cos\l
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">f3</span> <span class="k">=</span> <span class="n">evalExpr</span><span class="o">(</span><span class="n">expr3</span><span class="o">,</span> <span class="n">myEnvironment</span><span class="o">)</span> <span class="c1">// Should be 0.0</span>
@@ -15627,7 +15628,7 @@ $\left(1.00 - \left(\sin\left(x\right)\ \sin\left(x\right)\right) - \left(\cos\l
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[58]:</div>
+    <div class="prompt output_prompt">Out[54]:</div>
 
 
 
@@ -15644,7 +15645,7 @@ $\left(1.00 - \left(\sin\left(x\right)\ \sin\left(x\right)\right) - \left(\cos\l
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">f4</span> <span class="k">=</span> <span class="nc">Log</span><span class="o">(</span><span class="nc">Plus</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="nc">Const</span><span class="o">(</span><span class="mf">1.0</span><span class="o">),</span> <span class="nc">Mult</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="nc">Const</span><span class="o">(</span><span class="mf">2.0</span><span class="o">),</span> <span class="nc">Ident</span><span class="o">(</span><span class="s">&quot;y&quot;</span><span class="o">))))))</span>
@@ -15661,7 +15662,7 @@ $\left(1.00 - \left(\sin\left(x\right)\ \sin\left(x\right)\right) - \left(\cos\l
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[59]:</div>
+    <div class="prompt output_prompt">Out[55]:</div>
 
 
 
