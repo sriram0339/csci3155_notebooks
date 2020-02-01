@@ -13077,9 +13077,17 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Map,-Filter-and-Fold-(Reduce)-Operations">Map, Filter and Fold (Reduce) Operations<a class="anchor-link" href="#Map,-Filter-and-Fold-(Reduce)-Operations">&#182;</a></h1><p>In many languages, the use of for-loops/while loops to iterate is replaced by operations on data structures such as <code>map</code>, <code>filter</code> and <code>fold</code>. In this lecture, we provide a brief overview with some examples. We show how many varieties of loops or equivalently recursion, can be systematically replaced by these operations.</p>
-<h2 id="Map-operation">Map operation<a class="anchor-link" href="#Map-operation">&#182;</a></h2><p>The idea of a map operation is to apply a function $f$ to every member of a container (eg., list, array, map, etc.) and return a new container.</p>
-<h3 id="Example-1">Example 1<a class="anchor-link" href="#Example-1">&#182;</a></h3><p>We have a list <code>List(1, 3, 4, 5, 6, 110, 12, 2)</code>. We wish to compute the square of each element in the list and make a new list with the result.</p>
+<h1 id="Functors-in-Scala">Functors in Scala<a class="anchor-link" href="#Functors-in-Scala">&#182;</a></h1><p>The functional programming style eschews loops and replaces it with tail recursive functions that express the logic in a simple fashion, without carrying extra state.  Another mechanism that we will study now is that of "functors" such as "map", "filter" and "fold". These functors allow us to manipulate Lists of objects. But they also apply to other data structures in scala such as Maps.</p>
+<p>Before we begin with functors let us study different ways to write functions in scala, including a convenient notation for anonymous functions.</p>
+<p>Let us start with a function to multiply every elemeht of a list by two.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will now multiply every element of a list by 2.</p>
 
 </div>
 </div>
@@ -13089,11 +13097,12 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">recursivelySquareEachElt</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">acc</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">l</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
-        <span class="n">acc</span><span class="o">.</span><span class="n">reverse</span>
-    <span class="k">else</span>
-        <span class="n">recursivelySquareEachElt</span><span class="o">(</span><span class="n">l</span><span class="o">.</span><span class="n">tail</span><span class="o">,</span> <span class="o">(</span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="o">*</span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="o">)::</span><span class="n">acc</span><span class="o">)</span>
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">multiplyEachEltByTwo</span><span class="o">(</span><span class="n">lst</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">accList</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">lst</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">accList</span>
+    <span class="k">case</span> <span class="n">hd</span><span class="o">::</span><span class="n">tail</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="n">newAccList</span> <span class="k">=</span> <span class="n">accList</span> <span class="o">++</span> <span class="nc">List</span><span class="o">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">hd</span><span class="o">)</span> <span class="c1">// We add 2 * hd at the end why?</span>
+        <span class="n">multiplyEachEltByTwo</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">newAccList</span><span class="o">)</span>
+    <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 
@@ -13113,7 +13122,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">recursivelySquareEachElt</span></pre>
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">multiplyEachEltByTwo</span></pre>
 </div>
 
 </div>
@@ -13121,13 +13130,27 @@ div#notebook {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, we would like to remove all the even elements from a list, returning a new list with just the odd elements.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="n">recursivelySquareEachElt</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">10</span><span class="o">),</span> <span class="nc">List</span><span class="o">())</span>
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">removeEvenNumbers</span><span class="o">(</span><span class="n">lst</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">accList</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">lst</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">accList</span>
+    <span class="k">case</span> <span class="n">hd</span><span class="o">::</span><span class="n">tail</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="n">newAccList</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">hd</span> <span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span> <span class="n">accList</span> <span class="o">}</span> <span class="k">else</span> <span class="o">{</span> <span class="n">accList</span> <span class="o">++</span> <span class="nc">List</span><span class="o">(</span><span class="n">hd</span><span class="o">)</span> <span class="o">}</span>
+        <span class="n">removeEvenNumbers</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">newAccList</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 </pre></div>
 
     </div>
@@ -13146,7 +13169,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">res1</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">100</span>)</pre>
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">removeEvenNumbers</span></pre>
 </div>
 
 </div>
@@ -13154,13 +13177,24 @@ div#notebook {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally, we wish to sum up the elements of the list</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="n">recursivelySquareEachElt</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">110</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="nc">List</span><span class="o">())</span>
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">sumOfList</span><span class="o">(</span><span class="n">lst</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">sum</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">lst</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">sum</span>
+    <span class="k">case</span> <span class="n">hd</span><span class="o">::</span><span class="n">tail</span> <span class="k">=&gt;</span> <span class="n">sumOfList</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">hd</span><span class="o">)</span>
+<span class="o">}</span>
 </pre></div>
 
     </div>
@@ -13179,7 +13213,7 @@ div#notebook {
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">res2</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">1</span>, <span class="ansi-green-fg">9</span>, <span class="ansi-green-fg">16</span>, <span class="ansi-green-fg">25</span>, <span class="ansi-green-fg">36</span>, <span class="ansi-green-fg">12100</span>, <span class="ansi-green-fg">144</span>, <span class="ansi-green-fg">4</span>)</pre>
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">sumOfList</span></pre>
 </div>
 
 </div>
@@ -13191,86 +13225,7 @@ div#notebook {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Using the map operator over lists.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">squareEachElt</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>  <span class="n">l</span><span class="o">.</span><span class="n">map</span><span class="o">(</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">)</span> 
-<span class="c1">// x =&gt; x * x is an anonymous function that squares its arguments.</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[4]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">squareEachElt</span></pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="n">squareEachElt</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">110</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">2</span><span class="o">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[5]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">res4</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">1</span>, <span class="ansi-green-fg">9</span>, <span class="ansi-green-fg">16</span>, <span class="ansi-green-fg">25</span>, <span class="ansi-green-fg">36</span>, <span class="ansi-green-fg">12100</span>, <span class="ansi-green-fg">144</span>, <span class="ansi-green-fg">4</span>)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><code>l.map(f)</code> says that apply the function <code>f</code> on each element of the list <code>f</code>.</p>
-<p>First of all, the elements of the lists must be some type <code>A</code>, let's say. 
-Next, the function <code>f</code> must be of type <code>A =&gt; B</code>.</p>
-<p>Last but not least, <code>l.map(f)</code> applies <code>f</code> to every element in the list and returns a new list
-of type <code>B</code>.</p>
+<p>Finally, we can write our main function:</p>
 
 </div>
 </div>
@@ -13280,7 +13235,12 @@ of type <code>B</code>.</p>
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">sayHelloTo</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">l</span><span class="o">.</span><span class="n">map</span><span class="o">(</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="s">&quot;Hello &quot;</span><span class="o">+</span> <span class="n">x</span><span class="o">))</span>
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">processList</span><span class="o">(</span><span class="n">lst</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="c1">// Multiply by two</span>
+    <span class="k">val</span> <span class="n">lst1</span> <span class="k">=</span> <span class="n">removeEvenNumbers</span><span class="o">(</span><span class="n">lst</span><span class="o">)</span>
+    <span class="k">val</span> <span class="n">lst2</span> <span class="k">=</span> <span class="n">multiplyEachEltByTwo</span><span class="o">(</span><span class="n">lst1</span><span class="o">)</span>
+    <span class="n">sumOfList</span><span class="o">(</span><span class="n">lst2</span><span class="o">)</span>
+<span class="o">}</span>
 </pre></div>
 
     </div>
@@ -13299,84 +13259,7 @@ of type <code>B</code>.</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">sayHelloTo</span></pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="n">sayHelloTo</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="s">&quot;Cat&quot;</span><span class="o">,</span> <span class="s">&quot;Dog&quot;</span><span class="o">,</span> <span class="s">&quot;World&quot;</span><span class="o">))</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[7]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">res6</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">String</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">&#34;Hello Cat&#34;</span>, <span class="ansi-green-fg">&#34;Hello Dog&#34;</span>, <span class="ansi-green-fg">&#34;Hello World&#34;</span>)</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Sum-up-all-squares-of-numbers-from-1-to-n">Sum up all squares of numbers from 1 to n<a class="anchor-link" href="#Sum-up-all-squares-of-numbers-from-1-to-n">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">sumUpto</span><span class="o">(</span><span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">=</span> <span class="o">((</span><span class="mi">1</span> <span class="n">to</span> <span class="n">n</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">)).</span><span class="n">sum</span>
-<span class="c1">// (1 to n) creates a range or squence (not a list) from 1 to n.</span>
-<span class="c1">// I can apply map on this to square each element.</span>
-<span class="c1">// Calling sum on the result sums it up.</span>
-<span class="c1">// Anonymous function x=&gt; x * x does the squaring.</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[8]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">sumUpto</span></pre>
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">processList</span></pre>
 </div>
 
 </div>
@@ -13390,9 +13273,10 @@ of type <code>B</code>.</p>
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="n">sumUpto</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
-<span class="n">sumUpto</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
-<span class="n">sumUpto</span><span class="o">(</span><span class="mi">25</span><span class="o">)</span>
+<div class=" highlight hl-scala"><pre><span></span><span class="n">removeEvenNumbers</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">,</span><span class="mi">7</span><span class="o">,</span><span class="mi">8</span><span class="o">))</span>
+<span class="n">multiplyEachEltByTwo</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">))</span>
+<span class="n">sumOfList</span> <span class="o">((</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">100</span><span class="o">).</span><span class="n">toList</span><span class="o">)</span>
+<span class="n">processList</span><span class="o">((</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">20</span><span class="o">).</span><span class="n">toList</span><span class="o">)</span>
 </pre></div>
 
     </div>
@@ -13411,9 +13295,806 @@ of type <code>B</code>.</p>
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">res8_0</span>: <span class="ansi-green-fg">Int</span> = <span class="ansi-green-fg">14</span>
-<span class="ansi-cyan-fg">res8_1</span>: <span class="ansi-green-fg">Int</span> = <span class="ansi-green-fg">385</span>
-<span class="ansi-cyan-fg">res8_2</span>: <span class="ansi-green-fg">Int</span> = <span class="ansi-green-fg">5525</span></pre>
+<pre><span class="ansi-cyan-fg">res8_0</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">1</span>, <span class="ansi-green-fg">3</span>, <span class="ansi-green-fg">5</span>, <span class="ansi-green-fg">7</span>)
+<span class="ansi-cyan-fg">res8_1</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">2</span>, <span class="ansi-green-fg">4</span>, <span class="ansi-green-fg">6</span>, <span class="ansi-green-fg">8</span>)
+<span class="ansi-cyan-fg">res8_2</span>: <span class="ansi-green-fg">Int</span> = <span class="ansi-green-fg">5050</span>
+<span class="ansi-cyan-fg">res8_3</span>: <span class="ansi-green-fg">Int</span> = <span class="ansi-green-fg">200</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is somewhat painful since we need to write three separate functions to do the job.  Is there something better we can do?  Yes: let us recognize three patterns of operations we would like to achieve:</p>
+<ul>
+<li>Map: apply a function f to every element of a list.</li>
+<li>Filter: keep just those elements of the list that satisfy a "predicate"</li>
+<li>Fold (or reduce): perform an accumulative operation to every element of the list.</li>
+</ul>
+<p>Before we look closer at these operations, let us first familiarize ourselves with <code>anonymous</code> functions in scala.
+Often it is cumbersome to define functions by name where we would like to pass a function. Therefore, we will use "anonymous" functions.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">multiplyByTwo</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[6]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">multiplyByTwo</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here are two other ways to write the same thing.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">f</span> <span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[7]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">f</span>: <span class="ansi-green-fg">Int</span> =&gt; <span class="ansi-green-fg">Int</span> = ammonite.$sess.cmd6$Helper$$Lambda$2668/1591065996@4874493</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>f is bound to a function that takes in an argument <code>x</code> and returns  <code>x * 2</code>. You can pass the expression <code>(x) =&gt; x * 2</code> in any context you wish without giving it a name as we will see. Here is another succint version:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">f2</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=&gt;</span> <span class="nc">Int</span> <span class="k">=</span> <span class="k">_</span> <span class="o">*</span> <span class="mi">2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[8]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">f2</span>: <span class="ansi-green-fg">Int</span> =&gt; <span class="ansi-green-fg">Int</span> = ammonite.$sess.cmd7$Helper$$Lambda$2690/1232048499@361dc6d2</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>_</code> here is simply the first argument. Often it is important to specify the type of an argument in an anonymous function.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">g</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span> <span class="c1">// OK: Scala infers the type of x + x from that of x and the type of g is inferredd.</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[9]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">g</span>: <span class="ansi-green-fg">String</span> =&gt; <span class="ansi-green-fg">String</span> = ammonite.$sess.cmd8$Helper$$Lambda$2698/1226774339@67263635</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">g</span><span class="k">:</span> <span class="kt">String</span> <span class="o">=&gt;</span> <span class="nc">String</span> <span class="k">=</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span> <span class="c1">// OK: scala infers the typeof x from the type given to g</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[10]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">g</span>: <span class="ansi-green-fg">String</span> =&gt; <span class="ansi-green-fg">String</span> = ammonite.$sess.cmd9$Helper$$Lambda$2712/496013557@578113b3</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">g2</span> <span class="k">=</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">x</span> <span class="c1">// BAD: Scala has no way of knowing what x is. It can be a String, Int, Double, ...</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>cmd10.sc:1: missing parameter type
+val g2 = x =&gt; x + x // BAD: Scala has no way of knowing what x is. It can be a String, Int, Double, ...
+         ^Compilation Failed</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+Compilation Failed</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Anonymous functions can take multiple arguments.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">addFun</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">y</span><span class="k">:</span><span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[31]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">addFun</span>: (<span class="ansi-green-fg">Int</span>, <span class="ansi-green-fg">Int</span>) =&gt; <span class="ansi-green-fg">Int</span> = ammonite.$sess.cmd30$Helper$$Lambda$3086/901697560@464e089b</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">addFun</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Int</span><span class="o">))</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_1</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">_2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">addFun</span>: (<span class="ansi-green-fg">Int</span>, <span class="ansi-green-fg">Int</span>) =&gt; <span class="ansi-green-fg">Int</span> = ammonite.$sess.cmd11$Helper$$Lambda$2748/1806238802@472323aa</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">addFun</span><span class="k">:</span> <span class="o">(</span><span class="kt">Int</span><span class="o">,</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="nc">Int</span> <span class="k">=</span> <span class="k">_</span> <span class="o">+</span> <span class="k">_</span>  <span class="c1">// First _ is the first argument and second _ is the second argument.</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[14]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">addFun</span>: (<span class="ansi-green-fg">Int</span>, <span class="ansi-green-fg">Int</span>) =&gt; <span class="ansi-green-fg">Int</span> = ammonite.$sess.cmd13$Helper$$Lambda$2766/1498942801@25bbfb2a</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Last but not least in a case pattern matching setup, you can define an anonymous function without the match statement.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">sealed</span> <span class="k">trait</span> <span class="nc">MyList</span> 
+<span class="k">case</span> <span class="k">object</span> <span class="nc">MyNil</span> <span class="k">extends</span> <span class="nc">MyList</span>
+<span class="k">case</span> <span class="k">class</span> <span class="nc">MyCons</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">l</span><span class="k">:</span> <span class="kt">MyList</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">MyList</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[15]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">trait</span> <span class="ansi-cyan-fg">MyList</span>
+defined <span class="ansi-green-fg">object</span> <span class="ansi-cyan-fg">MyNil</span>
+defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">MyCons</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">anonIsEmptyFun</span><span class="k">:</span> <span class="kt">MyList</span> <span class="o">=&gt;</span> <span class="nc">Boolean</span> <span class="k">=</span> <span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span> <span class="n">x</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">MyNil</span> <span class="k">=&gt;</span> <span class="kc">true</span>
+    <span class="k">case</span> <span class="nc">MyCons</span><span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="kc">false</span>
+<span class="o">}}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[16]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">anonIsEmptyFun</span>: <span class="ansi-green-fg">MyList</span> =&gt; <span class="ansi-green-fg">Boolean</span> = ammonite.$sess.cmd15$Helper$$Lambda$2896/492234261@675dcae8</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">anonIsEmptyFun</span><span class="k">:</span> <span class="kt">MyList</span> <span class="o">=&gt;</span> <span class="nc">Boolean</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">MyNil</span> <span class="k">=&gt;</span> <span class="kc">true</span>
+    <span class="k">case</span> <span class="nc">MyCons</span><span class="o">(</span><span class="k">_</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="kc">false</span>
+<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[17]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">anonIsEmptyFun</span>: <span class="ansi-green-fg">MyList</span> =&gt; <span class="ansi-green-fg">Boolean</span> = ammonite.$sess.cmd16$Helper$$Lambda$2903/559238963@67bc868c</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In other words, when you have the pattern</p>
+
+<pre><code> (x : Type) =&gt; x match {
+     case .. =&gt;
+     case .. =&gt; 
+     ...
+     }</code></pre>
+<p>You can instead simply say</p>
+
+<pre><code>{ 
+  case .. =&gt; 
+  case .. =&gt; 
+  ...
+ }</code></pre>
+<p>without saying <code>(x : Type) =&gt; x match</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Map,-Filter-and-Fold-(Reduce)-Operations">Map, Filter and Fold (Reduce) Operations<a class="anchor-link" href="#Map,-Filter-and-Fold-(Reduce)-Operations">&#182;</a></h2><p>In many languages, the use of for-loops/while loops to iterate is replaced by operations on data structures such as <code>map</code>, <code>filter</code> and <code>fold</code>. In this lecture, we provide a brief overview with some examples. We show how many varieties of loops or equivalently recursion, can be systematically replaced by these operations.</p>
+<h2 id="Map-operation">Map operation<a class="anchor-link" href="#Map-operation">&#182;</a></h2><p>The idea of a map operation is to apply a function $f$ to every member of a container (eg., list, array, map, etc.) and return a new container.</p>
+<h3 id="Example-1">Example 1<a class="anchor-link" href="#Example-1">&#182;</a></h3><p>We have a list <code>List(1, 3, 4, 5, 6, 110, 12, 2)</code>. We wish to compute the square of each element in the list and make a new list with the result.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">recursivelySquareEachElt</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">acc</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">l</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span>
+        <span class="n">acc</span><span class="o">.</span><span class="n">reverse</span>
+    <span class="k">else</span>
+        <span class="n">recursivelySquareEachElt</span><span class="o">(</span><span class="n">l</span><span class="o">.</span><span class="n">tail</span><span class="o">,</span> <span class="o">(</span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="o">*</span><span class="n">l</span><span class="o">.</span><span class="n">head</span><span class="o">)::</span><span class="n">acc</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[18]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">recursivelySquareEachElt</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="n">recursivelySquareEachElt</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">10</span><span class="o">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[19]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">res18</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">100</span>)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="n">recursivelySquareEachElt</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">110</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">2</span><span class="o">),</span> <span class="nc">Nil</span><span class="o">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[20]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">res19</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">1</span>, <span class="ansi-green-fg">9</span>, <span class="ansi-green-fg">16</span>, <span class="ansi-green-fg">25</span>, <span class="ansi-green-fg">36</span>, <span class="ansi-green-fg">12100</span>, <span class="ansi-green-fg">144</span>, <span class="ansi-green-fg">4</span>)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Using the map operator over lists.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">squareEachElt</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span>  <span class="n">l</span><span class="o">.</span><span class="n">map</span><span class="o">(</span> <span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">*</span><span class="n">x</span> <span class="o">)</span> 
+<span class="c1">// x =&gt; x * x is an anonymous function that squares its arguments.</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[21]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">squareEachElt</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="n">squareEachElt</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">,</span> <span class="mi">110</span><span class="o">,</span> <span class="mi">12</span><span class="o">,</span> <span class="mi">2</span><span class="o">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[22]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">res21</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">1</span>, <span class="ansi-green-fg">9</span>, <span class="ansi-green-fg">16</span>, <span class="ansi-green-fg">25</span>, <span class="ansi-green-fg">36</span>, <span class="ansi-green-fg">12100</span>, <span class="ansi-green-fg">144</span>, <span class="ansi-green-fg">4</span>)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>l.map(f)</code> says that apply the function <code>f</code> on each element of the list <code>f</code>.</p>
+<p>First of all, the elements of the lists must be some type <code>A</code>, let's say. 
+Next, the function <code>f</code> must be of type <code>A =&gt; B</code>.</p>
+<p>Last but not least, <code>l.map(f)</code> applies <code>f</code> to every element in the list and returns a new list
+of type <code>B</code>. Here is a recursive definition of this function. Can you make it tail recursive??</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">listMap</span><span class="o">[</span><span class="kt">A</span>,<span class="kt">B</span><span class="o">](</span><span class="n">lst</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">fun</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="n">lst</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="nc">Nil</span>
+    <span class="k">case</span> <span class="n">hd</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="n">fun</span><span class="o">(</span><span class="n">hd</span><span class="o">)</span> <span class="o">::</span> <span class="n">listMap</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">fun</span><span class="o">)</span>  <span class="c1">// :: is the Cons operator in scala.</span>
+<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[23]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">listMap</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">sayHelloTo</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="n">l</span><span class="o">.</span><span class="n">map</span><span class="o">(</span> <span class="n">x</span> <span class="k">=&gt;</span> <span class="o">(</span><span class="s">&quot;Hello &quot;</span><span class="o">+</span> <span class="n">x</span><span class="o">))</span> <span class="c1">// Type of x is inferred by Scala</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[24]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">sayHelloTo</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="n">sayHelloTo</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="s">&quot;Cat&quot;</span><span class="o">,</span> <span class="s">&quot;Dog&quot;</span><span class="o">,</span> <span class="s">&quot;World&quot;</span><span class="o">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[25]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">res24</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">String</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">&#34;Hello Cat&#34;</span>, <span class="ansi-green-fg">&#34;Hello Dog&#34;</span>, <span class="ansi-green-fg">&#34;Hello World&#34;</span>)</pre>
 </div>
 
 </div>
@@ -13434,7 +14115,46 @@ of type <code>B</code>.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">retainAllMultiplesOfThree</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">acc</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Nil</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">l</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">acc</span>
+    <span class="k">case</span> <span class="n">hd</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="n">newAcc</span> <span class="k">=</span> <span class="k">if</span> <span class="o">(</span><span class="n">hd</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="o">{</span> <span class="n">acc</span> <span class="o">++</span> <span class="nc">List</span><span class="o">(</span><span class="n">hd</span><span class="o">)}</span> <span class="k">else</span> <span class="o">{</span> <span class="n">acc</span> <span class="o">}</span>
+        <span class="n">retainAllMultiplesOfThree</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">newAcc</span><span class="o">)</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[26]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">retainAllMultiplesOfThree</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">retainAllMultiplesOfThree</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
@@ -13452,7 +14172,7 @@ of type <code>B</code>.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[10]:</div>
+    <div class="prompt output_prompt">Out[27]:</div>
 
 
 
@@ -13500,19 +14220,31 @@ of type <code>B</code>.</p>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here is how the filter operation is defined abstractly</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="c1">// Sum up all odd squares from 1 to n</span>
-<span class="k">def</span> <span class="n">sumOddSquares</span><span class="o">(</span><span class="n">n</span> <span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
-    <span class="o">(</span><span class="mi">1</span> <span class="n">to</span> <span class="n">n</span><span class="o">).</span><span class="n">filter</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">x</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="o">).</span><span class="n">sum</span>
-    <span class="c1">// (1 to n) Range of all numbers frmo 1 to n, not a List</span>
-    <span class="c1">// filter -- take away odd numbers. </span>
-    <span class="c1">// Map from x to x* x</span>
-    <span class="c1">// sum up the answer</span>
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">filterList</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">(</span><span class="n">lst</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">filterFun</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="nc">Boolean</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">lst</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="nc">Nil</span>
+    <span class="k">case</span> <span class="n">head</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">filterFun</span><span class="o">(</span><span class="n">head</span><span class="o">)){</span>
+            <span class="n">head</span> <span class="o">::</span> <span class="n">filterList</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">filterFun</span><span class="o">)</span>
+        <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+            <span class="n">filterList</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">filterFun</span><span class="o">)</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 <span class="o">}</span>
+
+<span class="c1">// Ths is not tail recursive. Why? Can you make it tail recursive?</span>
 </pre></div>
 
     </div>
@@ -13525,46 +14257,13 @@ of type <code>B</code>.</p>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[12]:</div>
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">sumOddSquares</span></pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span><span class="n">sumOddSquares</span><span class="o">(</span><span class="mi">10</span><span class="o">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[13]:</div>
-
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">res12</span>: <span class="ansi-green-fg">Int</span> = <span class="ansi-green-fg">165</span></pre>
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">filterList</span></pre>
 </div>
 
 </div>
@@ -13586,6 +14285,70 @@ for each item in List
    acc = acc + item
 return acc</code></pre>
 <p>We can also do it with fold left operator.</p>
+<p>As an example consider the sum of the elements of a list above.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">recSumOfList</span><span class="o">(</span><span class="n">lst</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">sum</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">lst</span> <span class="k">match</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">sum</span>
+    <span class="k">case</span> <span class="n">hd</span><span class="o">::</span><span class="n">tail</span> <span class="k">=&gt;</span> <span class="n">recSumOfList</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">hd</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[29]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">recSumOfList</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Fold is a tricky operation to wrap one's head around. A list data structure gives us two versions of fold.</p>
+<h3 id="list.foldLeft-(startVal)-(fun)">list.foldLeft (startVal) (fun)<a class="anchor-link" href="#list.foldLeft-(startVal)-(fun)">&#182;</a></h3><p>For list <code>[l1, l2, l3, ..., ln]</code> the function call computes the following unrolled function:</p>
+<p><code>fun(.... fun( fun ( fun( startVal, l1), l2), l3), ....., ln)</code>
+This is equivalent to the following scala code:</p>
+
+<pre><code>var acc = startVal
+for (lj &lt;- list)
+   acc =  fun(acc, lj) // Very imp: acc is the first argument and lj is the second argument.</code></pre>
+<h3 id="list.foldRight-(startVal)-(fun)">list.foldRight (startVal) (fun)<a class="anchor-link" href="#list.foldRight-(startVal)-(fun)">&#182;</a></h3><p>This iterates the list from right to left. To wit, list <code>[l1, l2, l3, ..., ln]</code> the function call computes the following unrolled function:</p>
+<p><code>fun(l1, fun(.....,fun(ln-2, fun(ln-1, fun(ln, startVal)))</code></p>
+<p>This is equivalent to the following scala code:</p>
+
+<pre><code>var acc = startVal
+for (lj &lt;- list.reverse) // Note list is iterated in reverse
+   acc =  fun(lj, acc) // Very imp: acc is the second argument for foldRight</code></pre>
+<p>The fold function has two arguments: <code>startVal</code> and <code>fun</code>. Why don't we write: 
+<code>list.foldLeft(startVal, fun)</code>? This is a special syntax for writing  functions with multiple argument 
+in scala called  <strong>curried syntax</strong></p>
+<p><a href="https://alvinalexander.com/scala/fp-book/partially-applied-functions-currying-in-scala">https://alvinalexander.com/scala/fp-book/partially-applied-functions-currying-in-scala</a></p>
+<p>We will talk about currying in detail later on (in a few weeks) and it has nothing to do with Indian cuisine.</p>
 
 </div>
 </div>
@@ -13658,31 +14421,318 @@ return acc</code></pre>
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">sumFromRight</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span> <span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">foldRight</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="o">((</span><span class="n">x</span><span class="o">,</span> <span class="n">acc</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">acc</span><span class="o">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[30]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">sumFromRight</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The expression</p>
-
-<pre><code>l.foldLeft (initialValue) (function)</code></pre>
-<p>replaces the loop</p>
-
-<pre><code>var acc = initialValue // Start acc with initial value 
-for elt in l  // Iterate through the list l
-    acc = function(acc, elt) // acc as first arg and the elt as second.
-return acc</code></pre>
+<p>Let us now write a function <code>reverseList</code></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-scala"><pre><span></span>
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">reverseList</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> 
+<span class="n">l</span><span class="o">.</span><span class="n">foldLeft</span> <span class="o">(</span><span class="nc">Nil</span><span class="o">)</span>  <span class="o">(</span> <span class="o">(</span><span class="n">listSoFar</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">elt</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="n">elt</span><span class="o">::</span><span class="n">listSoFar</span>
+<span class="o">}</span> <span class="o">)</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>cmd34.sc:3: type mismatch;
+ found   : List[Int]
+ required: scala.collection.immutable.Nil.type
+    elt::listSoFar
+       ^Compilation Failed</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+Compilation Failed</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What just happened? Scala's type checker bailed on us.</p>
+<ul>
+<li>Nil is the empty list for any type: List[String], List[Int], List[Double], List[List[List[Int]]], and so on.</li>
+<li>The type checker is simply not sophisticated enough to figure out that the type of the accumulator in foldLeft here must be a list of int. </li>
+</ul>
+<p>There are two fixes.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">reverseListA</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> 
+   <span class="n">l</span><span class="o">.</span><span class="n">foldLeft</span>  <span class="o">(</span> <span class="nc">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]()</span> <span class="o">)</span> <span class="o">(</span> <span class="o">(</span><span class="n">listSoFar</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">elt</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="n">elt</span><span class="o">::</span><span class="n">listSoFar</span>
+<span class="o">}</span> <span class="o">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[35]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">reverseListA</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">reverseListB</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> 
+   <span class="n">l</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span>  <span class="o">(</span> <span class="nc">Nil</span> <span class="o">)</span> <span class="o">(</span> <span class="o">(</span><span class="n">listSoFar</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">elt</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+    <span class="n">elt</span><span class="o">::</span><span class="n">listSoFar</span>
+<span class="o">}</span> <span class="o">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[36]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">reverseListB</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In general, it is always nice to have the type of the accumulator specified in fold left. Last but not least, note that the anonymous function in fold can be written in case pattern form.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="k">def</span> <span class="n">reverseListC</span><span class="o">(</span><span class="n">l</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> <span class="n">l</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">[</span><span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">]]</span> <span class="o">(</span><span class="nc">Nil</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">case</span> <span class="o">(</span><span class="n">listSoFar</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">Int</span><span class="o">],</span> <span class="n">elt</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">elt</span><span class="o">::</span><span class="n">listSoFar</span>
+<span class="o">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[37]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">reverseListC</span></pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="n">reverseListA</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[38]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">res37</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">4</span>, <span class="ansi-green-fg">3</span>, <span class="ansi-green-fg">2</span>, <span class="ansi-green-fg">1</span>)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="n">reverseListB</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[39]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">res38</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">4</span>, <span class="ansi-green-fg">3</span>, <span class="ansi-green-fg">2</span>, <span class="ansi-green-fg">1</span>)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-scala"><pre><span></span><span class="n">reverseListC</span><span class="o">(</span><span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[40]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">res39</span>: <span class="ansi-green-fg">List</span>[<span class="ansi-green-fg">Int</span>] = <span class="ansi-yellow-fg">List</span>(<span class="ansi-green-fg">4</span>, <span class="ansi-green-fg">3</span>, <span class="ansi-green-fg">2</span>, <span class="ansi-green-fg">1</span>)</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
