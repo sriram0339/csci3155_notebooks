@@ -13277,7 +13277,18 @@ defined <span class="ansi-green-fg">class</span> <span class="ansi-cyan-fg">TopL
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">p1</span>: <span class="ansi-green-fg">TopLevel</span> = TopLevel(LetRec(f,z,IfThenElse(Geq(Const(0.0),Ident(z)),Const(1.0),Plus(Const(1.0),FunCall(Ident(f),Minus(Ident(z),Const(1.0))))),FunCall(Ident(f),Const(10.0))))</pre>
+<pre><span class="ansi-cyan-fg">p1</span>: <span class="ansi-green-fg">TopLevel</span> = <span class="ansi-yellow-fg">TopLevel</span>(
+  <span class="ansi-yellow-fg">LetRec</span>(
+    <span class="ansi-green-fg">&#34;f&#34;</span>,
+    <span class="ansi-green-fg">&#34;z&#34;</span>,
+    <span class="ansi-yellow-fg">IfThenElse</span>(
+      <span class="ansi-yellow-fg">Geq</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;z&#34;</span>)),
+      <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+      <span class="ansi-yellow-fg">Plus</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>), <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;z&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))))
+    ),
+    <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">10.0</span>))
+  )
+)</pre>
 </div>
 
 </div>
@@ -13524,10 +13535,51 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 <div class="output_text output_subarea output_execute_result">
 <pre><span class="ansi-cyan-fg">fact</span>: <span class="ansi-green-fg">Ident</span> = <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>)
 <span class="ansi-cyan-fg">n</span>: <span class="ansi-green-fg">Ident</span> = <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>)
-<span class="ansi-cyan-fg">ite</span>: <span class="ansi-green-fg">IfThenElse</span> = IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(Ident(factorial),Minus(Ident(n),Const(1.0)))))
-<span class="ansi-cyan-fg">fundef</span>: <span class="ansi-green-fg">FunDef</span> = FunDef(n,IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(Ident(factorial),Minus(Ident(n),Const(1.0))))))
-<span class="ansi-cyan-fg">e</span>: <span class="ansi-green-fg">Let</span> = Let(factorial,FunDef(n,IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(Ident(factorial),Minus(Ident(n),Const(1.0)))))),FunCall(Ident(factorial),Const(10.0)))
-<span class="ansi-cyan-fg">wrongFactorial</span>: <span class="ansi-green-fg">TopLevel</span> = TopLevel(Let(factorial,FunDef(n,IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(Ident(factorial),Minus(Ident(n),Const(1.0)))))),FunCall(Ident(factorial),Const(10.0))))</pre>
+<span class="ansi-cyan-fg">ite</span>: <span class="ansi-green-fg">IfThenElse</span> = <span class="ansi-yellow-fg">IfThenElse</span>(
+  <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+  <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+  <span class="ansi-yellow-fg">Mult</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))))
+)
+<span class="ansi-cyan-fg">fundef</span>: <span class="ansi-green-fg">FunDef</span> = <span class="ansi-yellow-fg">FunDef</span>(
+  <span class="ansi-green-fg">&#34;n&#34;</span>,
+  <span class="ansi-yellow-fg">IfThenElse</span>(
+    <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+    <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+    <span class="ansi-yellow-fg">Mult</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))))
+  )
+)
+<span class="ansi-cyan-fg">e</span>: <span class="ansi-green-fg">Let</span> = <span class="ansi-yellow-fg">Let</span>(
+  <span class="ansi-green-fg">&#34;factorial&#34;</span>,
+  <span class="ansi-yellow-fg">FunDef</span>(
+    <span class="ansi-green-fg">&#34;n&#34;</span>,
+    <span class="ansi-yellow-fg">IfThenElse</span>(
+      <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+      <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+      <span class="ansi-yellow-fg">Mult</span>(
+        <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>),
+        <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>)))
+      )
+    )
+  ),
+  <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">10.0</span>))
+)
+<span class="ansi-cyan-fg">wrongFactorial</span>: <span class="ansi-green-fg">TopLevel</span> = <span class="ansi-yellow-fg">TopLevel</span>(
+  <span class="ansi-yellow-fg">Let</span>(
+    <span class="ansi-green-fg">&#34;factorial&#34;</span>,
+    <span class="ansi-yellow-fg">FunDef</span>(
+      <span class="ansi-green-fg">&#34;n&#34;</span>,
+      <span class="ansi-yellow-fg">IfThenElse</span>(
+        <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+        <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+        <span class="ansi-yellow-fg">Mult</span>(
+          <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>),
+          <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>)))
+        )
+      )
+    ),
+    <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">10.0</span>))
+  )
+)</pre>
 </div>
 
 </div>
@@ -13568,15 +13620,14 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 <div class="output_subarea output_text output_error">
 <pre>
 <span class="ansi-red-fg">java.lang.IllegalArgumentException: Undefined identifier factorial</span>
-  $sess.cmd2Wrapper$Helper.evalExpr(<span class="ansi-green-fg">cmd2.sc</span>:<span class="ansi-green-fg">61</span>)
-  $sess.cmd2Wrapper$Helper.evalExpr(<span class="ansi-green-fg">cmd2.sc</span>:<span class="ansi-green-fg">100</span>)
-  $sess.cmd2Wrapper$Helper.applyArith2$1(<span class="ansi-green-fg">cmd2.sc</span>:<span class="ansi-green-fg">33</span>)
-  $sess.cmd2Wrapper$Helper.evalExpr(<span class="ansi-green-fg">cmd2.sc</span>:<span class="ansi-green-fg">70</span>)
-  $sess.cmd2Wrapper$Helper.evalProgram(<span class="ansi-green-fg">cmd2.sc</span>:<span class="ansi-green-fg">118</span>)
-  $sess.cmd4Wrapper$Helper.&lt;init&gt;(<span class="ansi-green-fg">cmd4.sc</span>:<span class="ansi-green-fg">1</span>)
-  $sess.cmd4Wrapper.&lt;init&gt;(<span class="ansi-green-fg">cmd4.sc</span>:<span class="ansi-green-fg">161</span>)
-  $sess.cmd4$.&lt;init&gt;(<span class="ansi-green-fg">cmd4.sc</span>:<span class="ansi-green-fg">103</span>)
-  $sess.cmd4$.&lt;clinit&gt;(<span class="ansi-green-fg">cmd4.sc</span>:<span class="ansi-green-fg">-1</span>)</pre>
+  ammonite.$sess.cmd2$Helper.evalExpr(<span class="ansi-green-fg">cmd2.sc</span>:<span class="ansi-green-fg">61</span>)
+  ammonite.$sess.cmd2$Helper.evalExpr(<span class="ansi-green-fg">cmd2.sc</span>:<span class="ansi-green-fg">100</span>)
+  ammonite.$sess.cmd2$Helper.applyArith2$1(<span class="ansi-green-fg">cmd2.sc</span>:<span class="ansi-green-fg">33</span>)
+  ammonite.$sess.cmd2$Helper.evalExpr(<span class="ansi-green-fg">cmd2.sc</span>:<span class="ansi-green-fg">70</span>)
+  ammonite.$sess.cmd2$Helper.evalProgram(<span class="ansi-green-fg">cmd2.sc</span>:<span class="ansi-green-fg">118</span>)
+  ammonite.$sess.cmd4$Helper.&lt;init&gt;(<span class="ansi-green-fg">cmd4.sc</span>:<span class="ansi-green-fg">1</span>)
+  ammonite.$sess.cmd4$.&lt;init&gt;(<span class="ansi-green-fg">cmd4.sc</span>:<span class="ansi-green-fg">7</span>)
+  ammonite.$sess.cmd4$.&lt;clinit&gt;(<span class="ansi-green-fg">cmd4.sc</span>:<span class="ansi-green-fg">-1</span>)</pre>
 </div>
 </div>
 
@@ -13693,12 +13744,80 @@ in
 <span class="ansi-cyan-fg">almost</span>: <span class="ansi-green-fg">Ident</span> = <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>)
 <span class="ansi-cyan-fg">n</span>: <span class="ansi-green-fg">Ident</span> = <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>)
 <span class="ansi-cyan-fg">f</span>: <span class="ansi-green-fg">Ident</span> = <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>)
-<span class="ansi-cyan-fg">e1</span>: <span class="ansi-green-fg">FunCall</span> = FunCall(Ident(factorial),Const(10.0))
-<span class="ansi-cyan-fg">double_af_call</span>: <span class="ansi-green-fg">FunDef</span> = FunDef(n,FunCall(FunCall(Ident(almost_factorial),Ident(almost_factorial)),Ident(n)))
-<span class="ansi-cyan-fg">e2</span>: <span class="ansi-green-fg">Let</span> = Let(factorial,FunDef(n,FunCall(FunCall(Ident(almost_factorial),Ident(almost_factorial)),Ident(n))),FunCall(Ident(factorial),Const(10.0)))
-<span class="ansi-cyan-fg">ite_expr</span>: <span class="ansi-green-fg">IfThenElse</span> = IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(FunCall(Ident(f),Ident(f)),Minus(Ident(n),Const(1.0)))))
-<span class="ansi-cyan-fg">af_body</span>: <span class="ansi-green-fg">FunDef</span> = FunDef(f,FunDef(n,IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(FunCall(Ident(f),Ident(f)),Minus(Ident(n),Const(1.0)))))))
-<span class="ansi-cyan-fg">p10</span>: <span class="ansi-green-fg">TopLevel</span> = TopLevel(Let(almost_factorial,FunDef(f,FunDef(n,IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(FunCall(Ident(f),Ident(f)),Minus(Ident(n),Const(1.0))))))),Let(factorial,FunDef(n,FunCall(FunCall(Ident(almost_factorial),Ident(almost_factorial)),Ident(n))),FunCall(Ident(factorial),Const(10.0)))))</pre>
+<span class="ansi-cyan-fg">e1</span>: <span class="ansi-green-fg">FunCall</span> = <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">10.0</span>))
+<span class="ansi-cyan-fg">double_af_call</span>: <span class="ansi-green-fg">FunDef</span> = <span class="ansi-yellow-fg">FunDef</span>(
+  <span class="ansi-green-fg">&#34;n&#34;</span>,
+  <span class="ansi-yellow-fg">FunCall</span>(
+    <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>)),
+    <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>)
+  )
+)
+<span class="ansi-cyan-fg">e2</span>: <span class="ansi-green-fg">Let</span> = <span class="ansi-yellow-fg">Let</span>(
+  <span class="ansi-green-fg">&#34;factorial&#34;</span>,
+  <span class="ansi-yellow-fg">FunDef</span>(
+    <span class="ansi-green-fg">&#34;n&#34;</span>,
+    <span class="ansi-yellow-fg">FunCall</span>(
+      <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>)),
+      <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>)
+    )
+  ),
+  <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">10.0</span>))
+)
+<span class="ansi-cyan-fg">ite_expr</span>: <span class="ansi-green-fg">IfThenElse</span> = <span class="ansi-yellow-fg">IfThenElse</span>(
+  <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+  <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+  <span class="ansi-yellow-fg">Mult</span>(
+    <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>),
+    <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>)), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>)))
+  )
+)
+<span class="ansi-cyan-fg">af_body</span>: <span class="ansi-green-fg">FunDef</span> = <span class="ansi-yellow-fg">FunDef</span>(
+  <span class="ansi-green-fg">&#34;f&#34;</span>,
+  <span class="ansi-yellow-fg">FunDef</span>(
+    <span class="ansi-green-fg">&#34;n&#34;</span>,
+    <span class="ansi-yellow-fg">IfThenElse</span>(
+      <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+      <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+      <span class="ansi-yellow-fg">Mult</span>(
+        <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>),
+        <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>)), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>)))
+      )
+    )
+  )
+)
+<span class="ansi-cyan-fg">p10</span>: <span class="ansi-green-fg">TopLevel</span> = <span class="ansi-yellow-fg">TopLevel</span>(
+  <span class="ansi-yellow-fg">Let</span>(
+    <span class="ansi-green-fg">&#34;almost_factorial&#34;</span>,
+    <span class="ansi-yellow-fg">FunDef</span>(
+      <span class="ansi-green-fg">&#34;f&#34;</span>,
+      <span class="ansi-yellow-fg">FunDef</span>(
+        <span class="ansi-green-fg">&#34;n&#34;</span>,
+        <span class="ansi-yellow-fg">IfThenElse</span>(
+          <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+          <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+          <span class="ansi-yellow-fg">Mult</span>(
+            <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>),
+            <span class="ansi-yellow-fg">FunCall</span>(
+              <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>)),
+              <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))
+            )
+          )
+        )
+      )
+    ),
+    <span class="ansi-yellow-fg">Let</span>(
+      <span class="ansi-green-fg">&#34;factorial&#34;</span>,
+      <span class="ansi-yellow-fg">FunDef</span>(
+        <span class="ansi-green-fg">&#34;n&#34;</span>,
+        <span class="ansi-yellow-fg">FunCall</span>(
+          <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>)),
+          <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>)
+        )
+      ),
+      <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">10.0</span>))
+    )
+  )
+)</pre>
 </div>
 
 </div>
@@ -13731,7 +13850,7 @@ in
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">res6</span>: <span class="ansi-green-fg">Value</span> = NumValue(3628800.0)</pre>
+<pre><span class="ansi-cyan-fg">res6</span>: <span class="ansi-green-fg">Value</span> = <span class="ansi-yellow-fg">NumValue</span>(<span class="ansi-green-fg">3628800.0</span>)</pre>
 </div>
 
 </div>
@@ -13781,12 +13900,80 @@ in
 <span class="ansi-cyan-fg">almost</span>: <span class="ansi-green-fg">Ident</span> = <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>)
 <span class="ansi-cyan-fg">n</span>: <span class="ansi-green-fg">Ident</span> = <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>)
 <span class="ansi-cyan-fg">f</span>: <span class="ansi-green-fg">Ident</span> = <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>)
-<span class="ansi-cyan-fg">e1</span>: <span class="ansi-green-fg">FunCall</span> = FunCall(Ident(factorial),Const(8.0))
-<span class="ansi-cyan-fg">double_af_call</span>: <span class="ansi-green-fg">FunDef</span> = FunDef(n,FunCall(FunCall(Ident(almost_factorial),Ident(almost_factorial)),Ident(n)))
-<span class="ansi-cyan-fg">e2</span>: <span class="ansi-green-fg">Let</span> = Let(factorial,FunDef(n,FunCall(FunCall(Ident(almost_factorial),Ident(almost_factorial)),Ident(n))),FunCall(Ident(factorial),Const(8.0)))
-<span class="ansi-cyan-fg">ite_expr</span>: <span class="ansi-green-fg">IfThenElse</span> = IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(FunCall(Ident(f),Ident(f)),Minus(Ident(n),Const(1.0)))))
-<span class="ansi-cyan-fg">af_body</span>: <span class="ansi-green-fg">FunDef</span> = FunDef(f,FunDef(n,IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(FunCall(Ident(f),Ident(f)),Minus(Ident(n),Const(1.0)))))))
-<span class="ansi-cyan-fg">p8</span>: <span class="ansi-green-fg">TopLevel</span> = TopLevel(Let(almost_factorial,FunDef(f,FunDef(n,IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(FunCall(Ident(f),Ident(f)),Minus(Ident(n),Const(1.0))))))),Let(factorial,FunDef(n,FunCall(FunCall(Ident(almost_factorial),Ident(almost_factorial)),Ident(n))),FunCall(Ident(factorial),Const(8.0)))))</pre>
+<span class="ansi-cyan-fg">e1</span>: <span class="ansi-green-fg">FunCall</span> = <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">8.0</span>))
+<span class="ansi-cyan-fg">double_af_call</span>: <span class="ansi-green-fg">FunDef</span> = <span class="ansi-yellow-fg">FunDef</span>(
+  <span class="ansi-green-fg">&#34;n&#34;</span>,
+  <span class="ansi-yellow-fg">FunCall</span>(
+    <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>)),
+    <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>)
+  )
+)
+<span class="ansi-cyan-fg">e2</span>: <span class="ansi-green-fg">Let</span> = <span class="ansi-yellow-fg">Let</span>(
+  <span class="ansi-green-fg">&#34;factorial&#34;</span>,
+  <span class="ansi-yellow-fg">FunDef</span>(
+    <span class="ansi-green-fg">&#34;n&#34;</span>,
+    <span class="ansi-yellow-fg">FunCall</span>(
+      <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>)),
+      <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>)
+    )
+  ),
+  <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">8.0</span>))
+)
+<span class="ansi-cyan-fg">ite_expr</span>: <span class="ansi-green-fg">IfThenElse</span> = <span class="ansi-yellow-fg">IfThenElse</span>(
+  <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+  <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+  <span class="ansi-yellow-fg">Mult</span>(
+    <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>),
+    <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>)), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>)))
+  )
+)
+<span class="ansi-cyan-fg">af_body</span>: <span class="ansi-green-fg">FunDef</span> = <span class="ansi-yellow-fg">FunDef</span>(
+  <span class="ansi-green-fg">&#34;f&#34;</span>,
+  <span class="ansi-yellow-fg">FunDef</span>(
+    <span class="ansi-green-fg">&#34;n&#34;</span>,
+    <span class="ansi-yellow-fg">IfThenElse</span>(
+      <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+      <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+      <span class="ansi-yellow-fg">Mult</span>(
+        <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>),
+        <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>)), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>)))
+      )
+    )
+  )
+)
+<span class="ansi-cyan-fg">p8</span>: <span class="ansi-green-fg">TopLevel</span> = <span class="ansi-yellow-fg">TopLevel</span>(
+  <span class="ansi-yellow-fg">Let</span>(
+    <span class="ansi-green-fg">&#34;almost_factorial&#34;</span>,
+    <span class="ansi-yellow-fg">FunDef</span>(
+      <span class="ansi-green-fg">&#34;f&#34;</span>,
+      <span class="ansi-yellow-fg">FunDef</span>(
+        <span class="ansi-green-fg">&#34;n&#34;</span>,
+        <span class="ansi-yellow-fg">IfThenElse</span>(
+          <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+          <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+          <span class="ansi-yellow-fg">Mult</span>(
+            <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>),
+            <span class="ansi-yellow-fg">FunCall</span>(
+              <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>)),
+              <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))
+            )
+          )
+        )
+      )
+    ),
+    <span class="ansi-yellow-fg">Let</span>(
+      <span class="ansi-green-fg">&#34;factorial&#34;</span>,
+      <span class="ansi-yellow-fg">FunDef</span>(
+        <span class="ansi-green-fg">&#34;n&#34;</span>,
+        <span class="ansi-yellow-fg">FunCall</span>(
+          <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_factorial&#34;</span>)),
+          <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>)
+        )
+      ),
+      <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;factorial&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">8.0</span>))
+    )
+  )
+)</pre>
 </div>
 
 </div>
@@ -13819,7 +14006,7 @@ in
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">res8</span>: <span class="ansi-green-fg">Value</span> = NumValue(40320.0)</pre>
+<pre><span class="ansi-cyan-fg">res8</span>: <span class="ansi-green-fg">Value</span> = <span class="ansi-yellow-fg">NumValue</span>(<span class="ansi-green-fg">40320.0</span>)</pre>
 </div>
 
 </div>
@@ -14031,9 +14218,61 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">e1</span>: <span class="ansi-green-fg">LetRec</span> = LetRec(f,z,IfThenElse(Geq(Const(0.0),Ident(z)),Const(1.0),Plus(Const(1.0),FunCall(Ident(f),Minus(Ident(z),Const(1.0))))),FunCall(Ident(f),Const(10.0)))
-<span class="ansi-cyan-fg">p1</span>: <span class="ansi-green-fg">TopLevel</span> = TopLevel(LetRec(f,z,IfThenElse(Geq(Const(0.0),Ident(z)),Const(1.0),Plus(Const(1.0),FunCall(Ident(f),Minus(Ident(z),Const(1.0))))),FunCall(Ident(f),Const(10.0))))
-<span class="ansi-cyan-fg">p2</span>: <span class="ansi-green-fg">TopLevel</span> = TopLevel(Let(almost_f,FunDef(rfun_param_tmp__0__,FunDef(z,IfThenElse(Geq(Const(0.0),Ident(z)),Const(1.0),Plus(Const(1.0),FunCall(FunCall(Ident(rfun_param_tmp__0__),Ident(rfun_param_tmp__0__)),Minus(Ident(z),Const(1.0))))))),Let(f,FunDef(z,FunCall(FunCall(Ident(almost_f),Ident(almost_f)),Ident(z))),FunCall(Ident(f),Const(10.0)))))</pre>
+<pre><span class="ansi-cyan-fg">e1</span>: <span class="ansi-green-fg">LetRec</span> = <span class="ansi-yellow-fg">LetRec</span>(
+  <span class="ansi-green-fg">&#34;f&#34;</span>,
+  <span class="ansi-green-fg">&#34;z&#34;</span>,
+  <span class="ansi-yellow-fg">IfThenElse</span>(
+    <span class="ansi-yellow-fg">Geq</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;z&#34;</span>)),
+    <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+    <span class="ansi-yellow-fg">Plus</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>), <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;z&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))))
+  ),
+  <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">10.0</span>))
+)
+<span class="ansi-cyan-fg">p1</span>: <span class="ansi-green-fg">TopLevel</span> = <span class="ansi-yellow-fg">TopLevel</span>(
+  <span class="ansi-yellow-fg">LetRec</span>(
+    <span class="ansi-green-fg">&#34;f&#34;</span>,
+    <span class="ansi-green-fg">&#34;z&#34;</span>,
+    <span class="ansi-yellow-fg">IfThenElse</span>(
+      <span class="ansi-yellow-fg">Geq</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;z&#34;</span>)),
+      <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+      <span class="ansi-yellow-fg">Plus</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>), <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;z&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))))
+    ),
+    <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">10.0</span>))
+  )
+)
+<span class="ansi-cyan-fg">p2</span>: <span class="ansi-green-fg">TopLevel</span> = <span class="ansi-yellow-fg">TopLevel</span>(
+  <span class="ansi-yellow-fg">Let</span>(
+    <span class="ansi-green-fg">&#34;almost_f&#34;</span>,
+    <span class="ansi-yellow-fg">FunDef</span>(
+      <span class="ansi-green-fg">&#34;rfun_param_tmp__0__&#34;</span>,
+      <span class="ansi-yellow-fg">FunDef</span>(
+        <span class="ansi-green-fg">&#34;z&#34;</span>,
+        <span class="ansi-yellow-fg">IfThenElse</span>(
+          <span class="ansi-yellow-fg">Geq</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;z&#34;</span>)),
+          <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+          <span class="ansi-yellow-fg">Plus</span>(
+            <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+            <span class="ansi-yellow-fg">FunCall</span>(
+              <span class="ansi-yellow-fg">FunCall</span>(
+                <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;rfun_param_tmp__0__&#34;</span>),
+                <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;rfun_param_tmp__0__&#34;</span>)
+              ),
+              <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;z&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))
+            )
+          )
+        )
+      )
+    ),
+    <span class="ansi-yellow-fg">Let</span>(
+      <span class="ansi-green-fg">&#34;f&#34;</span>,
+      <span class="ansi-yellow-fg">FunDef</span>(
+        <span class="ansi-green-fg">&#34;z&#34;</span>,
+        <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_f&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_f&#34;</span>)), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;z&#34;</span>))
+      ),
+      <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;f&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">10.0</span>))
+    )
+  )
+)</pre>
 </div>
 
 </div>
@@ -14066,7 +14305,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">res11</span>: <span class="ansi-green-fg">Value</span> = NumValue(11.0)</pre>
+<pre><span class="ansi-cyan-fg">res11</span>: <span class="ansi-green-fg">Value</span> = <span class="ansi-yellow-fg">NumValue</span>(<span class="ansi-green-fg">11.0</span>)</pre>
 </div>
 
 </div>
@@ -14077,7 +14316,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">e7</span><span class="k">=</span>  <span class="nc">LetRec</span><span class="o">(</span><span class="s">&quot;fact&quot;</span><span class="o">,</span> <span class="s">&quot;n&quot;</span><span class="o">,</span> 
@@ -14088,7 +14327,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
           <span class="o">)</span>
 
 <span class="k">val</span> <span class="n">fact_rec_7</span> <span class="k">=</span> <span class="nc">TopLevel</span><span class="o">(</span>
-   <span class="n">e12</span>
+   <span class="n">e7</span>
 <span class="o">)</span>
 
 <span class="k">val</span> <span class="n">fact_no_rec_7</span><span class="k">=</span> <span class="nc">TopLevel</span><span class="o">(</span> <span class="n">eliminateRecursion</span><span class="o">(</span><span class="n">e7</span><span class="o">)</span> <span class="o">)</span>
@@ -14104,25 +14343,69 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+    <div class="prompt output_prompt">Out[13]:</div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>cmd12.sc:9: not found: value e12
-   e12
-   ^</pre>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">e7</span>: <span class="ansi-green-fg">LetRec</span> = <span class="ansi-yellow-fg">LetRec</span>(
+  <span class="ansi-green-fg">&#34;fact&#34;</span>,
+  <span class="ansi-green-fg">&#34;n&#34;</span>,
+  <span class="ansi-yellow-fg">IfThenElse</span>(
+    <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+    <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+    <span class="ansi-yellow-fg">Mult</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;fact&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))))
+  ),
+  <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;fact&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">7.0</span>))
+)
+<span class="ansi-cyan-fg">fact_rec_7</span>: <span class="ansi-green-fg">TopLevel</span> = <span class="ansi-yellow-fg">TopLevel</span>(
+  <span class="ansi-yellow-fg">LetRec</span>(
+    <span class="ansi-green-fg">&#34;fact&#34;</span>,
+    <span class="ansi-green-fg">&#34;n&#34;</span>,
+    <span class="ansi-yellow-fg">IfThenElse</span>(
+      <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+      <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+      <span class="ansi-yellow-fg">Mult</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;fact&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))))
+    ),
+    <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;fact&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">7.0</span>))
+  )
+)
+<span class="ansi-cyan-fg">fact_no_rec_7</span>: <span class="ansi-green-fg">TopLevel</span> = <span class="ansi-yellow-fg">TopLevel</span>(
+  <span class="ansi-yellow-fg">Let</span>(
+    <span class="ansi-green-fg">&#34;almost_fact&#34;</span>,
+    <span class="ansi-yellow-fg">FunDef</span>(
+      <span class="ansi-green-fg">&#34;rfun_param_tmp__0__&#34;</span>,
+      <span class="ansi-yellow-fg">FunDef</span>(
+        <span class="ansi-green-fg">&#34;n&#34;</span>,
+        <span class="ansi-yellow-fg">IfThenElse</span>(
+          <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+          <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+          <span class="ansi-yellow-fg">Mult</span>(
+            <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>),
+            <span class="ansi-yellow-fg">FunCall</span>(
+              <span class="ansi-yellow-fg">FunCall</span>(
+                <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;rfun_param_tmp__0__&#34;</span>),
+                <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;rfun_param_tmp__0__&#34;</span>)
+              ),
+              <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))
+            )
+          )
+        )
+      )
+    ),
+    <span class="ansi-yellow-fg">Let</span>(
+      <span class="ansi-green-fg">&#34;fact&#34;</span>,
+      <span class="ansi-yellow-fg">FunDef</span>(
+        <span class="ansi-green-fg">&#34;n&#34;</span>,
+        <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_fact&#34;</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;almost_fact&#34;</span>)), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>))
+      ),
+      <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;fact&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">7.0</span>))
+    )
+  )
+)</pre>
 </div>
-</div>
 
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-Compilation Failed</pre>
-</div>
 </div>
 
 </div>
@@ -14131,7 +14414,7 @@ Compilation Failed</pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="n">evalProgram</span><span class="o">(</span><span class="n">fact_no_rec_7</span><span class="o">)</span>
@@ -14147,25 +14430,15 @@ Compilation Failed</pre>
 
 <div class="output_area">
 
-    <div class="prompt"></div>
+    <div class="prompt output_prompt">Out[14]:</div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>cmd12.sc:1: not found: value fact_no_rec_7
-val res12 = evalProgram(fact_no_rec_7)
-                        ^</pre>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre><span class="ansi-cyan-fg">res13</span>: <span class="ansi-green-fg">Value</span> = <span class="ansi-yellow-fg">NumValue</span>(<span class="ansi-green-fg">5040.0</span>)</pre>
 </div>
-</div>
 
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-Compilation Failed</pre>
-</div>
 </div>
 
 </div>
@@ -14215,7 +14488,7 @@ $\texttt{Extend}(\sigma, x, v)$.</li>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">sealed</span> <span class="k">trait</span> <span class="nc">Environment</span> 
@@ -14273,7 +14546,7 @@ $\texttt{Extend}(\sigma, x, v)$.</li>
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[13]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -14302,7 +14575,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">l
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="cm">/*-- We can rewrite evalExpr now to handle recursion as well --*/</span>
@@ -14405,7 +14678,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">l
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[14]:</div>
+    <div class="prompt output_prompt">Out[16]:</div>
 
 
 
@@ -14423,7 +14696,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="k">val</span> <span class="n">fact_rec_8</span> <span class="k">=</span> <span class="nc">TopLevel</span><span class="o">(</span>
@@ -14447,14 +14720,25 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[15]:</div>
+    <div class="prompt output_prompt">Out[17]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">fact_rec_8</span>: <span class="ansi-green-fg">TopLevel</span> = TopLevel(LetRec(fact,n,IfThenElse(Eq(Ident(n),Const(0.0)),Const(1.0),Mult(Ident(n),FunCall(Ident(fact),Minus(Ident(n),Const(1.0))))),FunCall(Ident(fact),Const(8.0))))
-<span class="ansi-cyan-fg">res14_1</span>: <span class="ansi-green-fg">Value</span> = NumValue(40320.0)</pre>
+<pre><span class="ansi-cyan-fg">fact_rec_8</span>: <span class="ansi-green-fg">TopLevel</span> = <span class="ansi-yellow-fg">TopLevel</span>(
+  <span class="ansi-yellow-fg">LetRec</span>(
+    <span class="ansi-green-fg">&#34;fact&#34;</span>,
+    <span class="ansi-green-fg">&#34;n&#34;</span>,
+    <span class="ansi-yellow-fg">IfThenElse</span>(
+      <span class="ansi-yellow-fg">Eq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+      <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>),
+      <span class="ansi-yellow-fg">Mult</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;fact&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;n&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>))))
+    ),
+    <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;fact&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">8.0</span>))
+  )
+)
+<span class="ansi-cyan-fg">res16_1</span>: <span class="ansi-green-fg">Value</span> = <span class="ansi-yellow-fg">NumValue</span>(<span class="ansi-green-fg">40320.0</span>)</pre>
 </div>
 
 </div>
@@ -14465,7 +14749,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="cm">/*--</span>
@@ -14498,7 +14782,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[16]:</div>
+    <div class="prompt output_prompt">Out[18]:</div>
 
 
 
@@ -14506,11 +14790,40 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 <div class="output_text output_subarea output_execute_result">
 <pre><span class="ansi-cyan-fg">crec</span>: <span class="ansi-green-fg">Ident</span> = <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;crazy_rec&#34;</span>)
 <span class="ansi-cyan-fg">x</span>: <span class="ansi-green-fg">Ident</span> = <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;x&#34;</span>)
-<span class="ansi-cyan-fg">e1</span>: <span class="ansi-green-fg">FunCall</span> = FunCall(Ident(crazy_rec),Const(-25.0))
-<span class="ansi-cyan-fg">e21</span>: <span class="ansi-green-fg">Mult</span> = Mult(Const(0.5),Minus(Const(1.0),Ident(x)))
-<span class="ansi-cyan-fg">e22</span>: <span class="ansi-green-fg">Mult</span> = Mult(Const(20.0),FunCall(Ident(crazy_rec),Minus(Const(0.0),Ident(x))))
-<span class="ansi-cyan-fg">e2</span>: <span class="ansi-green-fg">LetRec</span> = LetRec(crazy_rec,x,IfThenElse(Geq(Ident(x),Const(0.0)),Mult(Const(0.5),Minus(Const(1.0),Ident(x))),Mult(Const(20.0),FunCall(Ident(crazy_rec),Minus(Const(0.0),Ident(x))))),FunCall(Ident(crazy_rec),Const(-25.0)))
-<span class="ansi-cyan-fg">crazyProg</span>: <span class="ansi-green-fg">TopLevel</span> = TopLevel(LetRec(crazy_rec,x,IfThenElse(Geq(Ident(x),Const(0.0)),Mult(Const(0.5),Minus(Const(1.0),Ident(x))),Mult(Const(20.0),FunCall(Ident(crazy_rec),Minus(Const(0.0),Ident(x))))),FunCall(Ident(crazy_rec),Const(-25.0))))</pre>
+<span class="ansi-cyan-fg">e1</span>: <span class="ansi-green-fg">FunCall</span> = <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;crazy_rec&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">-25.0</span>))
+<span class="ansi-cyan-fg">e21</span>: <span class="ansi-green-fg">Mult</span> = <span class="ansi-yellow-fg">Mult</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.5</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;x&#34;</span>)))
+<span class="ansi-cyan-fg">e22</span>: <span class="ansi-green-fg">Mult</span> = <span class="ansi-yellow-fg">Mult</span>(
+  <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">20.0</span>),
+  <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;crazy_rec&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;x&#34;</span>)))
+)
+<span class="ansi-cyan-fg">e2</span>: <span class="ansi-green-fg">LetRec</span> = <span class="ansi-yellow-fg">LetRec</span>(
+  <span class="ansi-green-fg">&#34;crazy_rec&#34;</span>,
+  <span class="ansi-green-fg">&#34;x&#34;</span>,
+  <span class="ansi-yellow-fg">IfThenElse</span>(
+    <span class="ansi-yellow-fg">Geq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;x&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+    <span class="ansi-yellow-fg">Mult</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.5</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;x&#34;</span>))),
+    <span class="ansi-yellow-fg">Mult</span>(
+      <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">20.0</span>),
+      <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;crazy_rec&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;x&#34;</span>)))
+    )
+  ),
+  <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;crazy_rec&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">-25.0</span>))
+)
+<span class="ansi-cyan-fg">crazyProg</span>: <span class="ansi-green-fg">TopLevel</span> = <span class="ansi-yellow-fg">TopLevel</span>(
+  <span class="ansi-yellow-fg">LetRec</span>(
+    <span class="ansi-green-fg">&#34;crazy_rec&#34;</span>,
+    <span class="ansi-green-fg">&#34;x&#34;</span>,
+    <span class="ansi-yellow-fg">IfThenElse</span>(
+      <span class="ansi-yellow-fg">Geq</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;x&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>)),
+      <span class="ansi-yellow-fg">Mult</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.5</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">1.0</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;x&#34;</span>))),
+      <span class="ansi-yellow-fg">Mult</span>(
+        <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">20.0</span>),
+        <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;crazy_rec&#34;</span>), <span class="ansi-yellow-fg">Minus</span>(<span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">0.0</span>), <span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;x&#34;</span>)))
+      )
+    ),
+    <span class="ansi-yellow-fg">FunCall</span>(<span class="ansi-yellow-fg">Ident</span>(<span class="ansi-green-fg">&#34;crazy_rec&#34;</span>), <span class="ansi-yellow-fg">Const</span>(<span class="ansi-green-fg">-25.0</span>))
+  )
+)</pre>
 </div>
 
 </div>
@@ -14521,7 +14834,7 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-scala"><pre><span></span><span class="n">evalProgram</span><span class="o">(</span><span class="n">crazyProg</span><span class="o">)</span>
@@ -14537,13 +14850,13 @@ defined <span class="ansi-green-fg">function</span> <span class="ansi-cyan-fg">e
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[17]:</div>
+    <div class="prompt output_prompt">Out[19]:</div>
 
 
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre><span class="ansi-cyan-fg">res16</span>: <span class="ansi-green-fg">Value</span> = NumValue(-240.0)</pre>
+<pre><span class="ansi-cyan-fg">res18</span>: <span class="ansi-green-fg">Value</span> = <span class="ansi-yellow-fg">NumValue</span>(<span class="ansi-green-fg">-240.0</span>)</pre>
 </div>
 
 </div>
