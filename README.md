@@ -16,7 +16,7 @@ into the Scala language used in our class as lecture notes. However, the notes h
 Friedman and Wand's textbook. In particular, the notation used,
 the way concepts have been presented and the order of presentation have all significantly deviated from the book at this point. Nevertheless, the original inspiration for these notes is gratefully acknowledged.
 
-Sriram is grateful to Prof. Bor-Yuh Evan Chang for providing structure and designing this class. These lecture notes also owe a debt to Prof. Chang's own notes.
+Sriram is grateful to [Prof. Bor-Yuh Evan Chang](http://www.cs.colorado.edu/~bec) for providing structure and designing this class. These lecture notes also owe a debt to Prof. Chang's own notes.
 
 Spencer Wilson contributed comments/critique and many of the in class notebooks.
 
