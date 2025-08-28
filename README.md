@@ -17,7 +17,8 @@ contains the jupyter notebooks with examples that were used during lectures.
 
 ## How to view these notebooks
 
-Students registered in the class can use the official CSCI Virtual Machine. Setup instructions for Jupyter notebook and the scala kernel are provided.
+Students can use csel cloud (coding.csel) to run these notebooks. 
+ Setup instructions for Jupyter notebook and the scala kernel are provided.
 
 If you do not have access to these VMs, please install jupyter notebook, scala IDEs (including compiler, scala build tools) and the Almond kernel for
 scala: https://github.com/almond-sh/almond.
